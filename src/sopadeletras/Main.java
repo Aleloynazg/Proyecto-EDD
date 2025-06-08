@@ -8,7 +8,7 @@ package sopadeletras;
  *
  * @author alexandraloynaz
  */
-public class SopaDeLetras {
+public class Main {
 
     /**
      * @param args the command line arguments
