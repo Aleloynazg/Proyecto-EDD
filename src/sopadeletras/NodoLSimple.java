@@ -5,41 +5,50 @@
 package sopadeletras;
 
 /**
+ * Representa un nodod de una lista enlazada simple que almacena un NodoTablero
+ * Cada nodo contiene un dato y un apuntador al siguiente nodo en la lista.
  * 
  * @author alexandraloynaz
  */
 public class NodoLSimple {
-    private String dato; 
+    private NodoTablero dato; 
     private NodoLSimple pNext; 
-
-    public NodoLSimple(String dato) {
+/**
+ * Constructor que crea un nuevo nodo con NodoTablero
+ * @param dato el nodo del tablero que va a almacenar este nodo en la lista
+ */
+    public NodoLSimple(NodoTablero dato) {
         this.dato = dato;
         this.pNext = null;
     }
 
     /**
-     * @return the dato
+     * Obtiene el nodo tablero almacenado ese nodo
+     * @return el NodoTablero almacenado
      */
-    public String getDato() {
+    public NodoTablero getDato() {
         return dato;
     }
 
     /**
-     * @param dato the dato to set
+     * Establece el nodo del tablero para ese nodo
+     * @param dato el nuevo Nodo Tablero a almacenar
      */
-    public void setDato(String dato) {
+    public void setDato(NodoTablero dato) {
         this.dato = dato;
     }
 
     /**
-     * @return the pNext
+     * Obtiene el siguinete nodo en la lista
+     * @return el siguiente NodoSimple en la lista, o null si es el último
      */
     public NodoLSimple getpNext() {
         return pNext;
     }
 
     /**
-     * @param pNext the pNext to set
+     * Establece el siguiente nodo en la lista.
+     * @param pNext El nuevo nodo siguiente en esa lista.
      */
     public void setpNext(NodoLSimple pNext) {
         this.pNext = pNext;

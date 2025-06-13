@@ -11,28 +11,42 @@ package sopadeletras;
 
 public class ListaSimple {
     private NodoLSimple pFirst; 
-    private int cont; // puse el contador porque siento que nos puede servir mas adelante
-
-    public ListaSimple( int cont) {
+    private int cont; 
+/**
+ * Constructor que inicializa una lista vacía
+ */
+    
+    public ListaSimple() {
         this.pFirst = null;
         this.cont = 0;
     }
+    /**
+     * Inserta un nodo al inicio de la lista
+     * @param nodo el nodo del tablero que se va a insertar
+     */
 
-    public void insertarInicio(String letra){
-        NodoLSimple nuevo = new NodoLSimple(letra); 
+    public void insertarInicio(NodoTablero nodo){
+        NodoLSimple nuevo = new NodoLSimple(nodo); 
         nuevo.setpNext(getpFirst());
         setpFirst(nuevo); 
-        setCont(getCont() + 1); }
-    
+        cont++; }
+    /**
+     * Verifica si la lista esta vacía
+     * @return true si esta vacía, false si no esta vacía
+     */
     public boolean esVacia(){
-       if( getpFirst() == null) {
+       if(getpFirst() == null) {
            return true;}
        else{
         return false;
        }
     }
-    public void insertarFinal(String letra){
-        NodoLSimple  nuevo = new NodoLSimple(letra); 
+    /**
+     * Inserta un nodod al final de la lista
+     * @param nodo el nodo del tablero que se va a insertar al final
+     */
+    public void insertarFinal(NodoTablero nodo){
+        NodoLSimple  nuevo = new NodoLSimple(nodo); 
         if (esVacia()){
             setpFirst(nuevo);
         
@@ -44,8 +58,12 @@ public class ListaSimple {
         }
             aux.setpNext(nuevo);            
         }
-        setCont(getCont() + 1);  }
-    
+            cont ++;  
+    }
+    /**
+     * Busca el último nodo de la lista
+     * @return el último nodo de la lista, o null si es vacía
+     */
     public NodoLSimple buscarUltimo(){
         NodoLSimple  aux = pFirst; 
         if(pFirst == null){
@@ -59,42 +77,38 @@ public class ListaSimple {
         
         }
         
-    }
-    
-  
-    
-
+    }   
     /**
-     * @return the pFirst
+     * Obtiene el primer nodo de la lista 
+     * @return el primer nodo de la lista
      */
     public NodoLSimple getpFirst() {
         return pFirst;
     }
 
     /**
-     * @param pFirst the pFirst to set
+     * Establece el primer nodo de la lista 
+     * @param pFirst el nodo que se va a establecer como primero
      */
     public void setpFirst(NodoLSimple pFirst) {
         this.pFirst = pFirst;
     }
 
     /**
-     * @return the cont
+     * Obtiene el contador de nodos
+     * @return la cantidad de nodos en esa lista
      */
     public int getCont() {
         return cont;
     }
 
     /**
-     * @param cont the cont to set
+     * Establece el contador de nodos 
+     * @param cont el valor a establecer 
      */
     public void setCont(int cont) {
         this.cont = cont;
     }
-    
-    
-    
-    
-    
+   
 }
 
