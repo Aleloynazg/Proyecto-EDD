@@ -20,11 +20,9 @@ public class NodoTablero {
  * @param letra letra que va a contener ese nodo
  * @param fila posición horizontal en el tablero
  * @param columna posición vertical en el tablero
- * @param visitado revisa si ya ese nodo fue visitado en la busqueda
- * @param vecinos lista con sus nodos vecinos
  */  
     
-    public NodoTablero(char letra, int fila, int columna, boolean visitado, ListaSimple vecinos) {
+    public NodoTablero(char letra, int fila, int columna) {
         this.letra = letra;
         this.fila = fila;
         this.columna = columna;
@@ -37,7 +35,7 @@ public class NodoTablero {
      * @param n El nodo que se va a agregar 
      */
     public void insertarVecinos(NodoTablero n){
-        vecinos.insertarFinal(n);
+        this.vecinos.insertarFinal(n);
     
     }
 
@@ -128,3 +126,6 @@ public class NodoTablero {
     
     
 }
+/* @param visitado revisa si ya ese nodo fue visitado en la busqueda
+ * @param vecinos lista con sus nodos vecinos
+ */  
