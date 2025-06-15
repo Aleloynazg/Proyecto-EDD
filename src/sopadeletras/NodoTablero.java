@@ -126,6 +126,3 @@ public class NodoTablero {
     
     
 }
-/* @param visitado revisa si ya ese nodo fue visitado en la busqueda
- * @param vecinos lista con sus nodos vecinos
- */  
