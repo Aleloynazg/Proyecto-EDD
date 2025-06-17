@@ -39,22 +39,24 @@ public class MatrizTablero {
         for (int fila = 0; fila < 4; fila++) {
             for (int columna = 0; columna < 4; columna++) {
                 NodoTablero actual = matriz[fila][columna];
-                for (int i = -1; i <= 1; i++) {
-                    for (int j = -1; j <=1 ; j++) {
-                        if(i==0 && j==0) continue; 
-                        int vecinoFila = fila + i; 
-                        int vecinoColumna = columna +j;
-                        
+                for (int x = -1; x <= 1; x++) {
+                    for (int y = -1; y <=1 ; y++) {
+                        if(x!=0 || y!=0) {
+                        int vecinoFila = fila + x; 
+                        int vecinoColumna = columna +y;
                         if(vecinoFila>=0 && vecinoFila < 4 && vecinoColumna<4 && vecinoColumna>=0){
-                        actual.insertarVecinos(matriz[vecinoFila][vecinoColumna]);
+                            actual.insertarVecinos(matriz[vecinoFila][vecinoColumna]);
+                            //esto hace que sea bidireccionalmente. 
+                            matriz[vecinoFila][vecinoColumna].insertarVecinos(actual);
                         }
+                        
                     }
                 }
                 
             }
             
         }
-    
+        }
     }
     /**
      * Obtiene un nodo específico del tablero

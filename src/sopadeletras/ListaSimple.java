@@ -77,7 +77,17 @@ public class ListaSimple {
         
         }
         
-    }   
+    }
+    /**
+     * Función para imprimir los datos de una lista. 
+     */
+    public void imprimir(){
+    NodoLSimple aux = pFirst; 
+    while (aux!= null){
+        System.out.println(aux.getDato()+ " ");
+        aux=aux.getpNext();}
+    
+    }
     /**
      * Obtiene el primer nodo de la lista 
      * @return el primer nodo de la lista

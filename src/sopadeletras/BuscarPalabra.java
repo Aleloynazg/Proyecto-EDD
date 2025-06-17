@@ -14,6 +14,11 @@ public class BuscarPalabra {
     public BuscarPalabra(MatrizTablero tablero) {
         this.tablero = tablero;
     }
+    /**
+     * 
+     * @param palabra
+     * @return 
+     */
     public boolean existePalabra(String palabra){
         if(palabra== null){return false;}
         palabra = palabra.toUpperCase(); 
@@ -30,6 +35,14 @@ public class BuscarPalabra {
             }
             return false;
     }
+    /**
+     * 
+     * @param nodo
+     * @param palabra
+     * @param ind
+     * @param visitados
+     * @return 
+     */
     private boolean buscarDFS(NodoTablero nodo, String palabra, int ind, boolean[][] visitados) {
         if(ind== palabra.length()){
             return true;}

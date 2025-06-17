@@ -12,9 +12,9 @@ public class ListaPalabra {
     private NodoPalabra pFirst; 
     private int cont; 
 
-    public ListaPalabra(NodoPalabra pFirst, int cont) {
-        this.pFirst = pFirst;
-        this.cont = cont;
+    public ListaPalabra() {
+        this.pFirst = null;
+        this.cont = 0;
     }
     /**
      * 
