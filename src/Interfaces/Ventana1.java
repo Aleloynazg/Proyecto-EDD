@@ -3,9 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaces;
-
+import java.awt.Image;
+import javax.swing.JButton; 
+import javax.swing.JFrame;
+import javax.swing.JLabel; 
+import javax.swing.ImageIcon;
 /**
- *
+ *Interfaz de bienvenida, como la imagen tenia un 
  * @author alexandraloynaz
  */
 public class Ventana1 extends javax.swing.JFrame {
@@ -15,6 +19,20 @@ public class Ventana1 extends javax.swing.JFrame {
      */
     public Ventana1() {
         initComponents();
+        setSize(500,500);
+        setLocationRelativeTo(null);
+        ImageIcon boton = new ImageIcon(getClass().getResource("/Imagenes/BotonComenzar.png"));
+        BotonComenzar.setIcon(boton);
+        BotonComenzar.setBorderPainted(false);
+        BotonComenzar.setContentAreaFilled(false);
+
+        ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/ImagenBienvenida.png"));
+//        ImageIcon imagenBien = new ImageIcon(imagenFondo.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH));
+        JLabel fondo = new JLabel(imagenFondo);
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
+        
+      
+
     }
 
     /**
@@ -26,16 +44,27 @@ public class Ventana1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        BotonComenzar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
+        BotonComenzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonComenzarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonComenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 300, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonComenzarActionPerformed
+//        ImageIcon boton = new ImageIcon("/Imagenes/BotonComenzar.png");
+//        BotonComenzar.setIcon(boton);
+    }//GEN-LAST:event_BotonComenzarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -73,6 +102,6 @@ public class Ventana1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BotonComenzar;
     // End of variables declaration//GEN-END:variables
 }
