@@ -5,7 +5,7 @@
 package sopadeletras;
 
 /**
- * Representa un nodod de una lista enlazada simple que almacena un NodoTablero
+ * Representa un nodo de una lista enlazada simple que almacena un NodoTablero
  * Cada nodo contiene un dato y un apuntador al siguiente nodo en la lista.
  * 
  * @author alexandraloynaz

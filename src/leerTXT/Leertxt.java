@@ -71,7 +71,6 @@ public class Leertxt {
             while((linea=br.readLine())!= null){
                 linea = linea.trim();
                 if(esVacio(linea)){
-                    System.out.println("Línea vacía detectada, se ignora");
                     continue;
                 }
                 if(linea.replace("\uFEFF", "").equals("dic")|| linea.equals("dic")){

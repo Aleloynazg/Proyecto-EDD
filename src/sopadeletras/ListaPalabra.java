@@ -5,20 +5,22 @@
 package sopadeletras;
 
 /**
- *
+ * Clase de lista enlazada con sus primitivas
  * @author alexandraloynaz
  */
 public class ListaPalabra {
     private NodoPalabra pFirst; 
     private int cont; 
-
+/**
+ * Cosntrictor de la lista, inicializa la lista vacía.
+ */
     public ListaPalabra() {
         this.pFirst = null;
         this.cont = 0;
     }
     /**
-     * 
-     * @param palabra 
+     * Inserta una palabra al inicio de la lista.
+     * @param palabra  la palabra a insertar 
      */
     public void insertarInicio(String palabra){
         NodoPalabra nuevo = new NodoPalabra(palabra); 
@@ -56,7 +58,7 @@ public class ListaPalabra {
             cont++ ;  
     }
     /**
-     * Busca el último nodo de la lista
+     * Busca y retorna el último nodo de la lista
      * @return el último nodo de la lista, o null si es vacía
      */
     public NodoPalabra buscarUltimo(){
@@ -75,28 +77,32 @@ public class ListaPalabra {
     }   
 
     /**
-     * @return the pFirst
+     * Obtiene el primer nodo de la lista.
+     * @return pFirst el primer nodo de la lista.
      */
     public NodoPalabra getpFirst() {
         return pFirst;
     }
 
     /**
-     * @param pFirst the pFirst to set
+     * Establece el primer nodo de la lista
+     * @param pFirst el nodo a establecer como primero
      */
     public void setpFirst(NodoPalabra pFirst) {
         this.pFirst = pFirst;
     }
 
     /**
-     * @return the cont
+     * Obtiene el contador de elementos de la lista.
+     * @return la cantidad de elementos en la lista.
      */
     public int getCont() {
         return cont;
     }
 
     /**
-     * @param cont the cont to set
+     * Estableve el contador de elementos de la lista
+     * @param cont el Valor a estableces como contador
      */
     public void setCont(int cont) {
         this.cont = cont;
