@@ -74,51 +74,52 @@ public class BuscarPalabra {
         visitados[fila][columna] = false; 
         return false; 
         }
-        
-/**
- * Busca una palabra en el tablero usando BFS
- * @param palabra la palabra a buscar en el tablero
- * @return true si la palabra si se encuntra en el tablero, false si no.
- */   
-    public boolean existePalabraBFS(String palabra){
-        if(palabra== null){return false;}
-        palabra = palabra.toUpperCase(); 
-        char primeraLetra=palabra.charAt(0);
-            for (int fila = 0; fila < 4; fila++) {
-                for (int columna = 0; columna < 4; columna++) {
-                    NodoTablero nodo = tablero.obtenerNodo(fila, columna);
-                    if(nodo.getLetra()== primeraLetra){
-                        if(buscarBFS(nodo,palabra)){
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-    } 
-    
-    
-
-/**
- * Método para la busqueda BFS
- * @param inicio nodo inicial desde donde comenzar la busqueda
- * @param palabra la palabra que se esta buscando
- * @return  true si la palabra se encuntra, false en casa contrario. 
- */
-    private boolean buscarBFS(NodoTablero inicio, String palabra){
-
-
-
-
-
 }
-    
-    
-    
-    
-    
-    
-    }
+        
+///**
+// * Busca una palabra en el tablero usando BFS
+// * @param palabra la palabra a buscar en el tablero
+// * @return true si la palabra si se encuntra en el tablero, false si no.
+// */   
+//    public boolean existePalabraBFS(String palabra){
+//        if(palabra== null){return false;}
+//        palabra = palabra.toUpperCase(); 
+//        char primeraLetra=palabra.charAt(0);
+//            for (int fila = 0; fila < 4; fila++) {
+//                for (int columna = 0; columna < 4; columna++) {
+//                    NodoTablero nodo = tablero.obtenerNodo(fila, columna);
+//                    if(nodo.getLetra()== primeraLetra){
+//                        if(buscarBFS(nodo,palabra)){
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }
+//            return false;
+//    } 
+//    
+//    
+//
+///**
+// * Método para la busqueda BFS
+// * @param inicio nodo inicial desde donde comenzar la busqueda
+// * @param palabra la palabra que se esta buscando
+// * @return  true si la palabra se encuntra, false en casa contrario. 
+// */
+//    private boolean buscarBFS(NodoTablero inicio, String palabra){
+//
+//
+//
+//
+//
+//}
+//    
+//    
+//    
+//    
+//    
+//    
+//    }
     
     
     

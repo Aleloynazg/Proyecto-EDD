@@ -4,17 +4,64 @@
  */
 package Interfaces;
 
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import leerTXT.Leertxt;
+import sopadeletras.MatrizTablero;
+
 /**
- *
+ * Ventana para cargar archivos TXT y visualizar el tablero de sopa de letras.
+ * Permite: seleccionar un archivo, mostrar el tablero y continuar a la 
+ * siguiente ventena.
  * @author alexandraloynaz
  */
 public class Ventana2 extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Ventana2
-     */
+/**
+ * Indica si el archivo fue cargado y validado. 
+ */
+    boolean continuar = false;
+  /**
+   * Crea la ventana 500X500 px, con sus botones, imagen de fondo y 
+   * previsualización del tablero.
+   */
     public Ventana2() {
         initComponents();
+        setSize(500,500);
+        setLocationRelativeTo(null);
+        
+        ImageIcon botonAgregar = new ImageIcon(getClass().getResource("/Imagenes/BotonAgregarTXT.png"));
+        BotonAgregarTXT.setIcon(botonAgregar);
+
+        ImageIcon botonCont = new ImageIcon(getClass().getResource("/Imagenes/BotonContinuarTXT.png"));
+        BotonContinuar.setIcon(botonCont);
+
+        ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/ImagenCargarTXT.png"));
+        JLabel fondo = new JLabel(imagenFondo);
+        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
+        VerificacionTXT.setText("");
+        
+    }
+    /**
+     * Muestra el tablero en un panel. 
+     * @param tablero el tablero cargadi desde el archivo TXT
+     */
+    public void mostrarTablero(MatrizTablero tablero){
+    int tamanoCelda=30;
+    PreviewMatriz.removeAll();
+        for (int fila = 0; fila < 4; fila++) {
+            for (int columna = 0; columna < 4; columna++) {
+                char letra= tablero.obtenerNodo(fila, columna).getLetra();
+                JLabel celda = new JLabel(String.valueOf(letra),javax.swing.SwingConstants.CENTER);
+                PreviewMatriz.add(celda, new org.netbeans.lib.awtextra.AbsoluteConstraints(columna*30, fila*30, tamanoCelda, tamanoCelda));
+            }
+            
+        }
+        PreviewMatriz.repaint();
+        PreviewMatriz.revalidate();
+    
+    
     }
 
     /**
@@ -26,11 +73,75 @@ public class Ventana2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BotonAgregarTXT = new javax.swing.JButton();
+        VerificacionTXT = new javax.swing.JTextField();
+        PreviewMatriz = new java.awt.Panel();
+        BotonContinuar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        BotonAgregarTXT.setText("Boton Agregar");
+        BotonAgregarTXT.setPreferredSize(new java.awt.Dimension(220, 54));
+        BotonAgregarTXT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregarTXTActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonAgregarTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 210, -1));
+        getContentPane().add(VerificacionTXT, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 180, -1));
+
+        PreviewMatriz.setBackground(new java.awt.Color(237, 209, 186));
+        PreviewMatriz.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(PreviewMatriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 130, 130));
+
+        BotonContinuar.setText("Boton Continuar");
+        BotonContinuar.setPreferredSize(new java.awt.Dimension(150, 50));
+        BotonContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonContinuarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, 140, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+/**
+ * Botón para cargar el archivo TXT, este lo valida y muestra un mensaje si fue
+ * exitiso
+ * @param evt 
+ */
+    private void BotonAgregarTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarTXTActionPerformed
+        VerificacionTXT.setText("");
+        Leertxt lector = new Leertxt();
+        
+        boolean estaBien = lector.cargarArchivo(); 
+        
+        if(estaBien){
+            VerificacionTXT.setText("Archivo cargado con exito");
+            mostrarTablero(lector.getTablero());
+            continuar=true;
+            
+        }
+        else{
+            VerificacionTXT.setText("Vuelva a intentarlo");}
+
+    }//GEN-LAST:event_BotonAgregarTXTActionPerformed
+/**
+ * Permite al usuario continuar a la siguente ventana, cuando ya se valido el
+ * archivo
+ * @param evt 
+ */
+    private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
+        if(continuar){
+            Ventana3 v3 = new Ventana3(); 
+            v3.setVisible(true);}
+        else{
+        JOptionPane.showMessageDialog(null, "Primero debes cargar y validar el archivo para continual", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        }
+
+    }//GEN-LAST:event_BotonContinuarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,5 +179,9 @@ public class Ventana2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAgregarTXT;
+    private javax.swing.JButton BotonContinuar;
+    private java.awt.Panel PreviewMatriz;
+    private javax.swing.JTextField VerificacionTXT;
     // End of variables declaration//GEN-END:variables
 }

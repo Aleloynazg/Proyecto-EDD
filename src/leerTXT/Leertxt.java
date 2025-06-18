@@ -58,45 +58,63 @@ public class Leertxt {
      */
     private boolean revisarArchivo(File archivo){
         BufferedReader br = null;
+        boolean tieneDiccionario= false; 
+        boolean tieneTablero = false; 
 //        boolean logrado = false; 
         try{
             br= new BufferedReader(new FileReader(archivo));
             String linea;
             boolean diccionario= false; 
             boolean tablero = false; 
-            int fila = 0;
+            int filaAct=0;
+
             while((linea=br.readLine())!= null){
                 linea = linea.trim();
                 if(esVacio(linea)){
+                    System.out.println("Línea vacía detectada, se ignora");
                     continue;
                 }
-                if(linea.equals("dic")){
+                if(linea.replace("\uFEFF", "").equals("dic")|| linea.equals("dic")){
                     diccionario = true;
+                    tieneDiccionario = true;
+
                     continue; // estoy poniendo los continue para que salte a las siguientes partes y no se quede validando si tablero o diccionario son true or false
                 }
                 else if(linea.equals("/dic")){
                     diccionario = false; 
+
                     continue;
                 }
                 else if(linea.equals("tab")){
                     tablero = true;
+                    tieneTablero = true;
                     continue;
                 }
                 else if(linea.equals("/tab")){
                     tablero = false;
+
                     continue;}
                 if (diccionario){
+
                     procesarDiccionario(linea);
                 
                 } else if(tablero){
-                fila = procesarTablero(linea,fila);
-                }
+
+                    filaAct=procesarTablero(linea,filaAct);
+                    if(filaAct==-1){
+                    return false;
+                    }
+                
                 
             
             }
             
-           
+            }
+            if(!tieneDiccionario ||!tieneTablero){
+            return false;}
+            else{
         return true;
+            }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error inesperado", "error", JOptionPane.ERROR_MESSAGE);
         return false;
@@ -111,8 +129,8 @@ public class Leertxt {
      * @param texto el objeto que se desea verificar.
      * @return true si es nulo, false si no es nulo.
      */
-    public boolean esVacio(Object texto){
-            return texto == null; }
+    public boolean esVacio(String texto){
+            return texto == null|| texto.trim().equals(""); }
     
     
    /**
@@ -121,7 +139,7 @@ public class Leertxt {
     */ 
     private void procesarDiccionario(String palabra){
         palabra = palabra.trim().toUpperCase();
-        if(palabra.length()>=3 && enTablero(palabra)&& soloLetras(palabra)){
+        if(palabra.length()>=3 &&  soloLetras(palabra)){
             getDiccionario().insertarFinal(palabra);
         }
     }
@@ -137,11 +155,13 @@ public class Leertxt {
         String [] letras = linea.split(",");
         if(letras.length!=16){
             JOptionPane.showMessageDialog(null, "El tablero debe contener exactamente 16 letras y estas deben estar separadas por comas", "error", JOptionPane.ERROR_MESSAGE);
-            return fila;
+            return -1;
         }
         for (int i = 0; i < 16; i++) {
             String letra = letras[i].trim(); 
-            if(!esVacio(letra)&& letra.length()==1){
+            if (letra.length() != 1 || letra.charAt(0) < 'A' || letra.charAt(0) > 'Z'){
+                return -1;}
+
                 int filaactual = i/4;
                 int columna = i%4;
                 getTablero().establecerNodo(filaactual, columna, letra.charAt(0));
@@ -149,7 +169,7 @@ public class Leertxt {
             
             }
             
-        }
+        
         return 4;
     
     }

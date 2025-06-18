@@ -38,7 +38,7 @@ public class ListaPalabra {
     }
     /**
      * Inserta un nodo al final de la lista
-     * @param nodo el nodo del tablero que se va a insertar al final
+     * @param palabra el nodo del tablero que se va a insertar al final
      */
     public void insertarFinal(String palabra){
         NodoPalabra  nuevo = new NodoPalabra(palabra); 

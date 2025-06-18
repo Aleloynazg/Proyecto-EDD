@@ -5,7 +5,8 @@
 package sopadeletras;
 
 /**
- *
+ * Representa un nodo de una lista enlazada que almacena una palabra y tiene un 
+ * apuntador al nodo siguiente. 
  * @author alexandraloynaz
  */
 public class NodoPalabra {
@@ -13,9 +14,8 @@ public class NodoPalabra {
     private NodoPalabra pNext; 
 
     /**
-     * Constructor
-     * @param palabra
-     * @param pNext 
+     * Constructor que crea un nuevo nodo con la palabta especificada
+     * @param palabra la palabra que almacenara el nodo
      */
     public NodoPalabra(String palabra) {
         this.palabra = palabra;
@@ -23,28 +23,32 @@ public class NodoPalabra {
     }
 
     /**
-     * @return the palabra
+     * Obtiene la palabra almacenada en este nodo.
+     * @return the palabra contenida en el nodo 
      */
     public String getPalabra() {
         return palabra;
     }
 
     /**
-     * @param palabra the palabra to set
+     * Establece una nueva palabra para este nodo.
+     * @param palabra la nueva palabra a almacenar en este nodo.
      */
     public void setPalabra(String palabra) {
         this.palabra = palabra;
     }
 
     /**
-     * @return the pNext
+     * Obtiene el nodo siguente en la lista
+     * @return el nodo siguiente o null si es el último nodo
      */
     public NodoPalabra getpNext() {
         return pNext;
     }
 
     /**
-     * @param pNext the pNext to set
+     * Establece el nodo siguiente en la lista.
+     * @param pNext El Nodo que será el siguiente nodo
      */
     public void setpNext(NodoPalabra pNext) {
         this.pNext = pNext;

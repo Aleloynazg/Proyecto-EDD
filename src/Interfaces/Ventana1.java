@@ -3,19 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Interfaces;
-import java.awt.Image;
-import javax.swing.JButton; 
-import javax.swing.JFrame;
 import javax.swing.JLabel; 
 import javax.swing.ImageIcon;
 /**
- *Interfaz de bienvenida, como la imagen tenia un 
+ *Ventana inicial de bienvenida con imagen de fondo y botón para comenzar
+ * Al presionar el botón, abre la siguiente ventana
  * @author alexandraloynaz
  */
 public class Ventana1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ventana1
+     *Crea la ventana, con tamaño 500,500 (porque esa era el tamaño de la imagen)
+     * botón y fondo personalizado 
      */
     public Ventana1() {
         initComponents();
@@ -23,11 +22,9 @@ public class Ventana1 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         ImageIcon boton = new ImageIcon(getClass().getResource("/Imagenes/BotonComenzar.png"));
         BotonComenzar.setIcon(boton);
-        BotonComenzar.setBorderPainted(false);
-        BotonComenzar.setContentAreaFilled(false);
+
 
         ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/ImagenBienvenida.png"));
-//        ImageIcon imagenBien = new ImageIcon(imagenFondo.getImage().getScaledInstance(500, 500, Image.SCALE_SMOOTH));
         JLabel fondo = new JLabel(imagenFondo);
         getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
         
@@ -60,10 +57,14 @@ public class Ventana1 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Abre Ventana 2 cuando se presiona el botón
+ * @param evt 
+ */
     private void BotonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonComenzarActionPerformed
-//        ImageIcon boton = new ImageIcon("/Imagenes/BotonComenzar.png");
-//        BotonComenzar.setIcon(boton);
+        Ventana2 v2 = new Ventana2(); 
+        v2.setVisible(true);
+        
     }//GEN-LAST:event_BotonComenzarActionPerformed
 
     /**
