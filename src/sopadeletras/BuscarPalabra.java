@@ -4,6 +4,11 @@
  */
 package sopadeletras;
 
+import sopadeletras.ColaBFS;
+import sopadeletras.ListaSimple;
+import sopadeletras.MatrizTablero;
+import sopadeletras.NodoTablero;
+
 /**
  *Clase que implementa la búsqueda DFS O BFS, para encontrar la palabra en un 
  * tablero. 
@@ -74,7 +79,6 @@ public class BuscarPalabra {
         visitados[fila][columna] = false; 
         return false; 
         }
-}
         
 ///**
 // * Busca una palabra en el tablero usando BFS
@@ -107,8 +111,46 @@ public class BuscarPalabra {
 // * @return  true si la palabra se encuntra, false en casa contrario. 
 // */
 //    private boolean buscarBFS(NodoTablero inicio, String palabra){
-//
-//
+public ListaSimple BFSInicio(NodoTablero inicio, String palabra){
+    ColaBFS cola = new ColaBFS();
+    palabra = palabra.toUpperCase(); 
+    char primeraLetra=palabra.charAt(0);
+        for (int fila = 0; fila < 4; fila++) {
+            for (int columna = 0; columna < 4; columna++) {
+                NodoTablero nodo = tablero.obtenerNodo(fila, columna);
+                if(nodo.getLetra()== primeraLetra){
+                   cola.queue(nodo, null, null);
+                   ListaSimple resultado = BFS(cola, palabra, 1);
+                   if(resultado!=null){return resultado;}
+                }
+                }
+        }
+        return null;
+}
+
+
+public ListaSimple BFS(ColaBFS cola, String palabra, int ind){
+    NodoCola nodo = cola.dequeue();
+    if(nodo==null){
+        return null;
+    }
+    NodoTablero Letra = nodo.getDato().getDato();
+    if(ind == palabra.length() - 1){
+        nodo.getPalabra().insertarFinal(Letra);
+        return nodo.getPalabra();
+    }
+    ListaSimple adyacentes = Letra.getVecinos();
+    NodoLSimple aux = adyacentes.getpFirst();
+    while(aux!=null){
+        if(aux.getDato().isVisitado()==false && aux.getDato().getLetra()==palabra.charAt(ind)){
+            cola.queue(Letra, nodo.getPalabra(), nodo.getDato().getDato());
+        }
+        aux = aux.getpNext();
+    }
+    BFS(cola, palabra, ind++);
+    return null;
+}
+}
 //
 //
 //
