@@ -6,7 +6,10 @@ package Interfaces;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import sopadeletras.MatrizTablero;
+import sopadeletras.Grafo;
+import sopadeletras.ListaPalabra;
 
 /**
  *
@@ -17,11 +20,14 @@ public class Ventana3 extends javax.swing.JFrame {
     /**
      * Creates new form Ventana3
      */
-    public Ventana3(MatrizTablero tablero) {
-
+    public Ventana3(MatrizTablero tablero, ListaPalabra diccionario) {
+        tablero.conectarNodos();
         initComponents();
         setSize(500,540);
         mostrarTablero(tablero);
+        Grafo grafo = new Grafo(tablero);
+        
+        grafo.mostrarGrafo();
         
 
         
@@ -34,7 +40,7 @@ public class Ventana3 extends javax.swing.JFrame {
         JLabel fondo = new JLabel(imagenFondo);
        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
 //        VerificacionTXT.setText("");
-
+    cuadroDiccionario.setText(diccionario.mostrar());
         
     }
     public void mostrarTablero(MatrizTablero tablero){
@@ -53,6 +59,7 @@ public class Ventana3 extends javax.swing.JFrame {
     
     
     }
+    
      
     
 
@@ -71,6 +78,8 @@ public class Ventana3 extends javax.swing.JFrame {
         palabra = new javax.swing.JTextField();
         respuesta = new javax.swing.JTextField();
         MostrarTablero = new java.awt.Panel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cuadroDiccionario = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,12 +94,30 @@ public class Ventana3 extends javax.swing.JFrame {
 
         botonBuscarPalabra.setText("Agregar palabra");
         getContentPane().add(botonBuscarPalabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 210, 40));
+
+        palabra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                palabraActionPerformed(evt);
+            }
+        });
         getContentPane().add(palabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 140, -1));
+
+        respuesta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                respuestaActionPerformed(evt);
+            }
+        });
         getContentPane().add(respuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 230, -1));
 
         MostrarTablero.setBackground(new java.awt.Color(237, 209, 186));
         MostrarTablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(MostrarTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 250, 200));
+
+        cuadroDiccionario.setColumns(20);
+        cuadroDiccionario.setRows(5);
+        jScrollPane1.setViewportView(cuadroDiccionario);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 160, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,6 +126,18 @@ public class Ventana3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_BotonBSFActionPerformed
+
+    private void palabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palabraActionPerformed
+        // TODO add your handling code here:
+        String palabraBuscando = palabra.getText(); 
+        if (palabraBuscando.trim().length()<3){
+            JOptionPane.showMessageDialog(null, "La palabra debe tener minimo 3 letras ", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_palabraActionPerformed
+
+    private void respuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respuestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_respuestaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,6 +179,8 @@ public class Ventana3 extends javax.swing.JFrame {
     private javax.swing.JRadioButton BotonDSF;
     private java.awt.Panel MostrarTablero;
     private javax.swing.JButton botonBuscarPalabra;
+    private javax.swing.JTextArea cuadroDiccionario;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField palabra;
     private javax.swing.JTextField respuesta;
     // End of variables declaration//GEN-END:variables

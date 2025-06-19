@@ -4,6 +4,8 @@
  */
 package sopadeletras;
 
+import javax.swing.JOptionPane;
+
 /**
  * Clase de lista enlazada con sus primitivas
  * @author alexandraloynaz
@@ -74,7 +76,24 @@ public class ListaPalabra {
         
         }
         
-    }   
+    }
+    /**
+     * Muestra todas las palabras que se encuentran en el diccionario.
+     * 
+     * @return todas las palabras de la  
+     */
+    public String mostrar(){
+        String palabra = "";
+    NodoPalabra aux=getpFirst(); 
+    if(aux==null){
+        return "el diccionario esta vacio";
+    }
+    while(aux!=null){
+        palabra += aux.getPalabra() + "\n" ;
+        aux = aux.getpNext();
+    }
+    return palabra;   
+    }
 
     /**
      * Obtiene el primer nodo de la lista.
@@ -101,7 +120,7 @@ public class ListaPalabra {
     }
 
     /**
-     * Estableve el contador de elementos de la lista
+     * Establece el contador de elementos de la lista
      * @param cont el Valor a estableces como contador
      */
     public void setCont(int cont) {

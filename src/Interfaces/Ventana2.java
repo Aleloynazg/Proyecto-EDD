@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import leerTXT.Leertxt;
 import sopadeletras.MatrizTablero;
+import sopadeletras.ListaPalabra;
 
 /**
  * Ventana para cargar archivos TXT y visualizar el tablero de sopa de letras.
@@ -28,6 +29,7 @@ public class Ventana2 extends javax.swing.JFrame {
    */
     Leertxt lector = new Leertxt();
     public Ventana2() {
+//        ListaSimple diccionario;
         
         initComponents();
         setSize(500,500);
@@ -122,7 +124,9 @@ public class Ventana2 extends javax.swing.JFrame {
         if(estaBien){
             VerificacionTXT.setText("Archivo cargado con exito");
             mostrarTablero(lector.getTablero());
+            lector.getDiccionario();
             continuar=true;
+            
             
         }
         else{
@@ -136,7 +140,7 @@ public class Ventana2 extends javax.swing.JFrame {
  */
     private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
         if(continuar){
-            Ventana3 v3 = new Ventana3(lector.getTablero()); 
+            Ventana3 v3 = new Ventana3(lector.getTablero(), lector.getDiccionario()); 
             v3.setVisible(true);}
         else{
         JOptionPane.showMessageDialog(null, "Primero debes cargar y validar el archivo para continual", "Error", JOptionPane.ERROR_MESSAGE);
