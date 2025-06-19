@@ -4,8 +4,9 @@
  */
 package sopadeletras;
 import leerTXT.Leertxt;
-import Interfaces.Ventana2;
+import Interfaces.Ventana3;
 import Interfaces.Ventana1;
+import sopadeletras.MatrizTablero;
 
 /**
  *Prueba
@@ -19,8 +20,8 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        Ventana1 v2 = new Ventana1(); 
-        v2.setVisible(true);
+        Ventana1 v1 = new Ventana1(); 
+        v1.setVisible(true);
 
         
         

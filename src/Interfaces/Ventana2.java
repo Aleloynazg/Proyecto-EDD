@@ -26,7 +26,9 @@ public class Ventana2 extends javax.swing.JFrame {
    * Crea la ventana 500X500 px, con sus botones, imagen de fondo y 
    * previsualización del tablero.
    */
+    Leertxt lector = new Leertxt();
     public Ventana2() {
+        
         initComponents();
         setSize(500,500);
         setLocationRelativeTo(null);
@@ -113,7 +115,7 @@ public class Ventana2 extends javax.swing.JFrame {
  */
     private void BotonAgregarTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarTXTActionPerformed
         VerificacionTXT.setText("");
-        Leertxt lector = new Leertxt();
+        
         
         boolean estaBien = lector.cargarArchivo(); 
         
@@ -134,7 +136,7 @@ public class Ventana2 extends javax.swing.JFrame {
  */
     private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
         if(continuar){
-            Ventana3 v3 = new Ventana3(); 
+            Ventana3 v3 = new Ventana3(lector.getTablero()); 
             v3.setVisible(true);}
         else{
         JOptionPane.showMessageDialog(null, "Primero debes cargar y validar el archivo para continual", "Error", JOptionPane.ERROR_MESSAGE);

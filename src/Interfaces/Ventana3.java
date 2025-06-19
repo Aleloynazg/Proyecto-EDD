@@ -4,6 +4,10 @@
  */
 package Interfaces;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import sopadeletras.MatrizTablero;
+
 /**
  *
  * @author alexandraloynaz
@@ -13,9 +17,43 @@ public class Ventana3 extends javax.swing.JFrame {
     /**
      * Creates new form Ventana3
      */
-    public Ventana3() {
+    public Ventana3(MatrizTablero tablero) {
+
         initComponents();
+        setSize(500,540);
+        mostrarTablero(tablero);
+        
+
+        
+       ImageIcon buscarPalabra = new ImageIcon(getClass().getResource("/Imagenes/BotonBuscarPalabra.png"));
+       botonBuscarPalabra.setIcon(buscarPalabra);
+//
+
+//
+        ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/FondoVentana3.png"));
+        JLabel fondo = new JLabel(imagenFondo);
+       getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
+//        VerificacionTXT.setText("");
+
+        
     }
+    public void mostrarTablero(MatrizTablero tablero){
+        int tamanoCelda=65;
+        MostrarTablero.removeAll();
+            for (int fila = 0; fila < 4; fila++) {
+                for (int columna = 0; columna < 4; columna++) {
+                char letra= tablero.obtenerNodo(fila, columna).getLetra();
+                JLabel celda = new JLabel(String.valueOf(letra),javax.swing.SwingConstants.CENTER);
+                MostrarTablero.add(celda, new org.netbeans.lib.awtextra.AbsoluteConstraints(columna*tamanoCelda, fila*tamanoCelda, tamanoCelda, tamanoCelda));
+            }
+            
+        }
+        MostrarTablero.repaint();
+        MostrarTablero.revalidate();
+    
+    
+    }
+     
     
 
     /**
@@ -27,11 +65,40 @@ public class Ventana3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BotonBSF = new javax.swing.JRadioButton();
+        BotonDSF = new javax.swing.JRadioButton();
+        botonBuscarPalabra = new javax.swing.JButton();
+        palabra = new javax.swing.JTextField();
+        respuesta = new javax.swing.JTextField();
+        MostrarTablero = new java.awt.Panel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        BotonBSF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonBSFActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonBSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        getContentPane().add(BotonDSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+
+        botonBuscarPalabra.setText("Agregar palabra");
+        getContentPane().add(botonBuscarPalabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 210, 40));
+        getContentPane().add(palabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 140, -1));
+        getContentPane().add(respuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 230, -1));
+
+        MostrarTablero.setBackground(new java.awt.Color(237, 209, 186));
+        MostrarTablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(MostrarTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 250, 200));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotonBSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBSFActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_BotonBSFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -63,11 +130,17 @@ public class Ventana3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana3().setVisible(true);
+                new Ventana3(tablero).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton BotonBSF;
+    private javax.swing.JRadioButton BotonDSF;
+    private java.awt.Panel MostrarTablero;
+    private javax.swing.JButton botonBuscarPalabra;
+    private javax.swing.JTextField palabra;
+    private javax.swing.JTextField respuesta;
     // End of variables declaration//GEN-END:variables
 }
