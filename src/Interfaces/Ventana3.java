@@ -16,6 +16,7 @@ public class Ventana3 extends javax.swing.JFrame {
     public Ventana3() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

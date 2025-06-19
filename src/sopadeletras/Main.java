@@ -12,6 +12,7 @@ import Interfaces.Ventana1;
  * @author alexandraloynaz
  */
 public class Main {
+    
 
     /**
      * @param args the command line arguments
