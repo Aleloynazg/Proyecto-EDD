@@ -42,6 +42,23 @@ public class ListaSimple {
        }
     }
     /**
+     * Elimina el ultimo elemento de una lista 
+     */
+    public void eliminarUltimo(){
+    if(pFirst== null){
+        return;}
+    if(pFirst.getpNext()== null){
+        pFirst = null;
+        return;}
+    NodoLSimple aux = pFirst;
+    while(aux.getpNext().getpNext()!= null){
+        aux = aux.getpNext();}
+    aux.setpNext(null);
+    
+    
+    
+    }
+    /**
      * Inserta un nodod al final de la lista
      * @param nodo el nodo del tablero que se va a insertar al final
      */

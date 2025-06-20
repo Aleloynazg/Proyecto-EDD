@@ -19,8 +19,11 @@ import sopadeletras.ListaSimple;
  */
 public class Ventana3 extends javax.swing.JFrame {
 public MatrizTablero tablero;
+private ListaPalabra diccionario;
 public Grafo grafo;
 private boolean EsBFS;
+private boolean EsDFS;
+ private BuscarPalabra buscador;
     /**
      * Creates new form Ventana3
      */
@@ -29,9 +32,10 @@ private boolean EsBFS;
         initComponents();
         setSize(500,540);
         this.tablero = tablero;
+        this.diccionario=diccionario;
         mostrarTablero(tablero);
         grafo = new Grafo(tablero);
-        
+        buscador = new BuscarPalabra(tablero);
         grafo.mostrarGrafo();
         
 
@@ -141,6 +145,7 @@ private boolean EsBFS;
     private void BotonBSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBSFActionPerformed
         // TODO add your handling code here:
         this.EsBFS = true;
+        this.EsDFS = false;
         
         
     }//GEN-LAST:event_BotonBSFActionPerformed
@@ -159,25 +164,39 @@ private boolean EsBFS;
 
     private void botonBuscarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPalabraActionPerformed
         // TODO add your handling code here:
+        String palabraBuscando = palabra.getText().trim().toUpperCase();
+        boolean enDiccionario = diccionario.enDiccionario(palabraBuscando);
+        boolean enTablero = buscador.existePalabraDFS(palabraBuscando);
+        if(!enDiccionario && enTablero){
+            JOptionPane.showMessageDialog(null, "La palabra no se encuentra en el diccionario pero si en el tablero, ahora se va a agregar");
+            diccionario.insertarFinal(palabraBuscando);
+            cuadroDiccionario.setText(diccionario.mostrar());
         BuscarPalabra busqueda = new BuscarPalabra(tablero);
-        String p = palabra.getText();
-        ListaSimple Lista = null;
+        
+        ListaSimple ruta = null;
         if(this.EsBFS){
-            Lista = busqueda.BFSInicio(p);
+            ruta = busqueda.BFSInicio(palabraBuscando);
         } else{
-            //AÑADIR CODIGO DE BUSQUEDA DFS AQUI
+            ruta = busqueda.rutaDFS(palabraBuscando);
+            
+            
         }
-        if(Lista!=null){
-            grafo.mostrarPalabra(Lista);
+        if(ruta!=null){
+            grafo.limpiar();
+            grafo.mostrarPalabra(ruta);
+            grafo.mostrarGrafo();
+            respuesta.setText("Palabra encontrada: "+ palabraBuscando);
         } else{
-            JOptionPane.showMessageDialog(null, "La palabra no existe en la sopa de letras");
+            respuesta.setText("La palabra no existe en la sopa de letras");
         }
-        grafo.mostrarGrafo();
+        }
+
     }//GEN-LAST:event_botonBuscarPalabraActionPerformed
 
     private void BotonDSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDSFActionPerformed
         // TODO add your handling code here:
         this.EsBFS = false;
+        this.EsDFS= true; 
     }//GEN-LAST:event_BotonDSFActionPerformed
 
     /**

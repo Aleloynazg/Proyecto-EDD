@@ -3,8 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/corinalynch/Desktop/Proyecto1EDD/GitHub/Proyecto-EDD/</file>
-            <file>file:/Users/corinalynch/Desktop/Proyecto1EDD/GitHub/Proyecto-EDD/src/sopadeletras/Grafo.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/Interfaces/Ventana1.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/ListaSimple.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/NodoTablero.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/MatrizTablero.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/Grafo.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/ColaBFS.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/Interfaces/Ventana2.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/NodoLSimple.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/leerTXT/Leertxt.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/BuscarPalabra.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/Main.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/sopadeletras/ListaPalabra.java</file>
+            <file>file:/Users/alexandraloynaz/Desktop/Unimet/Estructuras/Proyecto/SopaDeLetras/src/Interfaces/Ventana3.java</file>
         </group>
     </open-files>
 </project-private>

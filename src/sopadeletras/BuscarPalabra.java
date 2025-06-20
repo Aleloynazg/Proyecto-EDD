@@ -80,28 +80,7 @@ public class BuscarPalabra {
         return false; 
         }
         
-///**
-// * Busca una palabra en el tablero usando BFS
-// * @param palabra la palabra a buscar en el tablero
-// * @return true si la palabra si se encuntra en el tablero, false si no.
-// */   
-//    public boolean existePalabraBFS(String palabra){
-//        if(palabra== null){return false;}
-//        palabra = palabra.toUpperCase(); 
-//        char primeraLetra=palabra.charAt(0);
-//            for (int fila = 0; fila < 4; fila++) {
-//                for (int columna = 0; columna < 4; columna++) {
-//                    NodoTablero nodo = tablero.obtenerNodo(fila, columna);
-//                    if(nodo.getLetra()== primeraLetra){
-//                        if(buscarBFS(nodo,palabra)){
-//                            return true;
-//                        }
-//                    }
-//                }
-//            }
-//            return false;
-//    } 
-//    
+
 //    
 //
 ///**
@@ -130,7 +109,46 @@ public ListaSimple BFSInicio(String palabra){
         return null;
 }
 
+    public ListaSimple rutaDFS(String palabra){
+        if(palabra == null || palabra.length()<3){
+            return null;}
+        palabra = palabra.toUpperCase();
+         char primeraLetra=palabra.charAt(0);
+            for (int fila = 0; fila < 4; fila++) {
+                for (int columna = 0; columna < 4; columna++) {
+                   NodoTablero nodo = tablero.obtenerNodo(fila, columna);
+                   if(nodo.getLetra() == primeraLetra){
+                   boolean [][] visitados = new boolean[4][4];
+                   ListaSimple ruta = new ListaSimple();
+                   if(buscarRutaDFS(nodo,palabra,0,visitados,ruta)){
+                   return ruta;}}
+                }
 
+    }
+            return null;
+    }
+    public boolean buscarRutaDFS(NodoTablero nodo, String palabra, int indice, boolean [][] visitados, ListaSimple ruta){
+        int fila = nodo.getFila();
+        int columna = nodo.getColumna();
+        if(indice == palabra.length()){
+        return true;
+        }
+        if (visitados[fila][columna]||nodo.getLetra()!=palabra.charAt(indice)){
+            return false;}
+        visitados[fila][columna]=true;
+        ruta.insertarFinal(nodo);
+        NodoLSimple actual = nodo.getVecinos().getpFirst();
+        while(actual != null){
+            NodoTablero aux = actual.getDato();
+            if(buscarRutaDFS(aux,palabra,indice+1,visitados,ruta)){
+                return true;}
+            actual = actual.getpNext();
+        }
+        visitados [fila][columna]=false;
+        ruta.eliminarUltimo();
+        return false;
+
+    }
 public ListaSimple BFS(ColaBFS cola, String palabra){
     NodoCola nodo = cola.dequeue();
     if(nodo==null){
