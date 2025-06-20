@@ -72,7 +72,11 @@ public class MatrizTablero {
             return null;}
         
         }
-    
+    /**
+ * Recorre todos los nodos en la matriz del tablero y restablece su estado 'visitado' a falso.
+ * Este método es fundamental para reiniciar el tablero entre búsquedas o algoritmos,
+ * asegurando que todos los nodos sean considerados no visitados al inicio de una nueva operación.
+ */
     public void limpiar(){
         for (int fila = 0; fila < 4; fila++) {
             for (int columna = 0; columna < 4; columna++) {

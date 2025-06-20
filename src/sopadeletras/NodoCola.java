@@ -5,8 +5,10 @@
 package sopadeletras;
 
 /**
- *
- * @author corinalynch
+ * Clase que representa un nodo dentro de una cola utilizada en algoritmos de Búsqueda en Amplitud (BFS).
+ * Cada `NodoCola` encapsula la información necesaria para rastrear el progreso de la búsqueda de una palabra
+ * en un tablero de letras.
+ * @autor Corina Lynch
  */
 
 public class NodoCola {
@@ -14,6 +16,17 @@ public class NodoCola {
     private NodoCola pNext;
     private ListaSimple palabra;
     private int posicion;
+    
+     /**
+     * Constructor para inicializar un nuevo `NodoCola`.
+     * Este constructor realiza una copia profunda de la lista `palabra` proporcionada para asegurar
+     * que cada camino de búsqueda sea independiente y las modificaciones no afecten a otros caminos.
+     *
+     * @param nodo El `NodoTablero` que este `NodoCola` representará como la letra actual en la búsqueda.
+     * @param palabra La `ListaSimple` que contiene las letras anteriores que ya forman parte de la palabra.
+     * @param posicion La posición (índice) de la letra actual (`nodo`) dentro de la palabra objetivo.
+     * @autor Corina Lynch
+     */
 
     
     public NodoCola(NodoTablero nodo, ListaSimple palabra, int posicion){

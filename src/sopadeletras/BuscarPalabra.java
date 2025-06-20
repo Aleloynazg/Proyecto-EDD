@@ -161,6 +161,15 @@ public ListaSimple BFSInicio(String palabra){
         return false;
 
     }
+    /**
+ * Implementa un algoritmo de Búsqueda en Amplitud (BFS) para encontrar una palabra específica en un tablero de letras.
+ *
+ * @param cola La cola BFS que contiene los nodos a explorar, representando posibles caminos en el tablero.
+ * @param palabra La palabra objetivo que se está buscando en el tablero.
+ * @return Una ListaSimple que contiene los NodosTablero que forman la palabra encontrada, o null si la palabra no se encuentra o la cola se vacía.
+ * @autor Corina lynch
+ */
+    
 public ListaSimple BFS(ColaBFS cola, String palabra){
     NodoCola nodo = cola.dequeue();
     if(nodo==null){
