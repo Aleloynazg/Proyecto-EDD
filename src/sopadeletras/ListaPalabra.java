@@ -94,6 +94,25 @@ public class ListaPalabra {
     }
     return palabra;   
     }
+    /**
+     * Busca una palabra para ver si se encuentra dentro de la lista.
+     * @param palabra palabra que se desea buscar
+     * @return true si se encuentra en el diccionario (la lista), false si no se encuentra 
+     */
+    public boolean enDiccionario(String palabra){
+    NodoPalabra aux = getpFirst(); 
+    while(aux!= null){
+        if(aux.getPalabra().equals(palabra.toUpperCase())){
+            return true; 
+        }
+        else{
+        aux=aux.getpNext();
+        }
+    
+    }
+    
+        return false; 
+    }
 
     /**
      * Obtiene el primer nodo de la lista.

@@ -141,7 +141,8 @@ public class Ventana2 extends javax.swing.JFrame {
     private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
         if(continuar){
             Ventana3 v3 = new Ventana3(lector.getTablero(), lector.getDiccionario()); 
-            v3.setVisible(true);}
+            v3.setVisible(true);
+            this.dispose();}
         else{
         JOptionPane.showMessageDialog(null, "Primero debes cargar y validar el archivo para continual", "Error", JOptionPane.ERROR_MESSAGE);
         

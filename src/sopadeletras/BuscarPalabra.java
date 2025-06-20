@@ -151,18 +151,7 @@ public ListaSimple BFS(ColaBFS cola, String palabra, int ind){
     return null;
 }
 }
-//
-//
-//
-//}
-//    
-//    
-//    
-//    
-//    
-//    
-//    }
-    
+
     
     
 
