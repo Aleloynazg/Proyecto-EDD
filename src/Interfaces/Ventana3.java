@@ -68,7 +68,7 @@ private boolean EsDFS;
      * @param tablero el tablero que se desea mostrar
      */
     public void mostrarTablero(MatrizTablero tablero){
-        int tamanoCelda=65;
+        int tamanoCelda=50;
         MostrarTablero.removeAll();
             for (int fila = 0; fila < 4; fila++) {
                 for (int columna = 0; columna < 4; columna++) {
@@ -141,7 +141,7 @@ private boolean EsDFS;
 
         MostrarTablero.setBackground(new java.awt.Color(237, 209, 186));
         MostrarTablero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(MostrarTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 250, 200));
+        getContentPane().add(MostrarTablero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 210, 190));
 
         cuadroDiccionario.setColumns(20);
         cuadroDiccionario.setRows(5);

@@ -9,7 +9,7 @@ import Interfaces.Ventana1;
 import sopadeletras.MatrizTablero;
 
 /**
- *Prueba
+ * Comienza el programa al llamar a la ventana 1 
  * @author alexandraloynaz
  */
 public class Main {
