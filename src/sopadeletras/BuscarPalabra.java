@@ -81,8 +81,7 @@ public class BuscarPalabra {
         }
         
 
-//    
-//
+
 ///**
 // * Método para la busqueda BFS
 // * @param inicio nodo inicial desde donde comenzar la busqueda
@@ -108,7 +107,11 @@ public ListaSimple BFSInicio(String palabra){
         }
         return null;
 }
-
+/**
+ * Busca una palabra en el tablero utilizando un algoritmo DFS
+ * @param palabra la palabra a buscar en el tablero.
+ * @return una ListaSimple que contiene la secuencia de nodos que forman a esa palabra o null si la palabra no esta en el tablero
+ */
     public ListaSimple rutaDFS(String palabra){
         if(palabra == null || palabra.length()<3){
             return null;}
@@ -127,6 +130,15 @@ public ListaSimple BFSInicio(String palabra){
     }
             return null;
     }
+    /**
+     * Método recursivo que implementa la búsqueda por DFS para encontrar la palabra en el tablero y cosntruir la ruta de nodos
+     * @param nodo el nodo actual que esta siendo evaluado
+     * @param palabra la palabra completa que se está buscando
+     * @param indice la posición actual en la palabra (la letra) que se es está verificando.
+     * @param visitados matriz que registra que nodos ya han sido verificados
+     * @param ruta Lista que almacena la secuencia de nodos de la ruta
+     * @return true si se encontró la palabra completa a partir de ese nodo, false si no e puedo completar la palabra
+     */
     public boolean buscarRutaDFS(NodoTablero nodo, String palabra, int indice, boolean [][] visitados, ListaSimple ruta){
         int fila = nodo.getFila();
         int columna = nodo.getColumna();
@@ -173,17 +185,7 @@ public ListaSimple BFS(ColaBFS cola, String palabra){
     return l;
 }
 }
-//
-//
-//
-//}
-//    
-//    
-//    
-//    
-//    
-//    
-//    }
+
     
     
     

@@ -14,7 +14,7 @@ import sopadeletras.ListaPalabra;
 import sopadeletras.ListaSimple;
 
 /**
- *
+ * Ventana que muestra el tablero de a sopa de letras, permite buscar palabras y visualizar la ruta segun dos algoritmos.
  * @author alexandraloynaz
  */
 public class Ventana3 extends javax.swing.JFrame {
@@ -25,7 +25,9 @@ private boolean EsBFS;
 private boolean EsDFS;
  private BuscarPalabra buscador;
     /**
-     * Creates new form Ventana3
+     * Contructor que genera una instancia de ventana3 con el tablero y diccionario especifico 
+     * @param tablero el tablero con todas las letras
+     * @param diccionario lista de palabras que se encuentran en este tablero. 
      */
     public Ventana3(MatrizTablero tablero, ListaPalabra diccionario) {
         tablero.conectarNodos();
@@ -42,6 +44,8 @@ private boolean EsDFS;
         
        ImageIcon buscarPalabra = new ImageIcon(getClass().getResource("/Imagenes/BotonBuscarPalabra.png"));
        botonBuscarPalabra.setIcon(buscarPalabra);
+       ImageIcon botonReestablecer = new ImageIcon(getClass().getResource("/Imagenes/BotonReestablecer.png"));
+       BotonReestablecer.setIcon(botonReestablecer);
 //
 
 //
@@ -52,6 +56,10 @@ private boolean EsDFS;
     cuadroDiccionario.setText(diccionario.mostrar());
         
     }
+    /** 
+     * Muestra el tablero en la interfaz
+     * @param tablero el tablero que se desea mostrar
+     */
     public void mostrarTablero(MatrizTablero tablero){
         int tamanoCelda=65;
         MostrarTablero.removeAll();
@@ -89,6 +97,7 @@ private boolean EsDFS;
         MostrarTablero = new java.awt.Panel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cuadroDiccionario = new javax.swing.JTextArea();
+        BotonReestablecer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,20 +108,9 @@ private boolean EsDFS;
             }
         });
         getContentPane().add(BotonBSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
-
-        BotonDSF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonDSFActionPerformed(evt);
-            }
-        });
         getContentPane().add(BotonDSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         botonBuscarPalabra.setText("Agregar palabra");
-        botonBuscarPalabra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarPalabraActionPerformed(evt);
-            }
-        });
         getContentPane().add(botonBuscarPalabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 210, 40));
 
         palabra.addActionListener(new java.awt.event.ActionListener() {
@@ -139,9 +137,20 @@ private boolean EsDFS;
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 160, 120));
 
+        BotonReestablecer.setText("Reestablecer");
+        BotonReestablecer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonReestablecerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonReestablecer, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 10, 100, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Asegura que solo la opcion de BSF se encuntra activada
+ * @param evt 
+ */
     private void BotonBSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBSFActionPerformed
         // TODO add your handling code here:
         this.EsBFS = true;
@@ -149,7 +158,10 @@ private boolean EsDFS;
         
         
     }//GEN-LAST:event_BotonBSFActionPerformed
-
+/** 
+ * Valida la palabra ingresada.
+ * @param evt 
+ */
     private void palabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palabraActionPerformed
         // TODO add your handling code here:
         String palabraBuscando = palabra.getText(); 
@@ -161,7 +173,10 @@ private boolean EsDFS;
     private void respuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respuestaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_respuestaActionPerformed
-
+/**
+ * Realiza la busqueda de la palabra cuando se presiona el botón, también se actualiza el diccionario si la palabra se encuntra en el tablero.
+ * @param evt 
+ */
     private void botonBuscarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPalabraActionPerformed
         // TODO add your handling code here:
         String palabraBuscando = palabra.getText().trim().toUpperCase();
@@ -184,7 +199,6 @@ private boolean EsDFS;
         if(ruta!=null){
             grafo.limpiar();
             grafo.mostrarPalabra(ruta);
-            grafo.mostrarGrafo();
             respuesta.setText("Palabra encontrada: "+ palabraBuscando);
         } else{
             respuesta.setText("La palabra no existe en la sopa de letras");
@@ -192,12 +206,27 @@ private boolean EsDFS;
         }
 
     }//GEN-LAST:event_botonBuscarPalabraActionPerformed
-
+/**
+ * Asegura que solo la opcion de DSF se encuntra activada
+ * @param evt 
+ */
     private void BotonDSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDSFActionPerformed
         // TODO add your handling code here:
         this.EsBFS = false;
         this.EsDFS= true; 
     }//GEN-LAST:event_BotonDSFActionPerformed
+
+    private void BotonReestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonReestablecerActionPerformed
+       palabra.setText("");
+      respuesta.setText("");
+      BotonBSF.setSelected(false);
+       BotonDSF.setSelected(false);
+         this.EsBFS=false; 
+       this.EsDFS= false;
+       grafo.limpiar();
+       JOptionPane.showMessageDialog(null, "Puede comenzar a buscar una nueva palabra");
+
+    }//GEN-LAST:event_BotonReestablecerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +266,7 @@ private boolean EsDFS;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BotonBSF;
     private javax.swing.JRadioButton BotonDSF;
+    private javax.swing.JButton BotonReestablecer;
     private java.awt.Panel MostrarTablero;
     private javax.swing.JButton botonBuscarPalabra;
     private javax.swing.JTextArea cuadroDiccionario;

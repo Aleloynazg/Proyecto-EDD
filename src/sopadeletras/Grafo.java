@@ -73,6 +73,10 @@ public class Grafo {
     
     
 }
+    /**
+     * Resalta en el grafo los nodos que forman la palabra encontrada, cambiandolos de color a morado
+     * @param palabra ListaSimple que contiene la secuencia de nodos que forman la palabra en el tablero.
+     */
     public void mostrarPalabra(ListaSimple palabra){
         limpiar();
         NodoLSimple letra = palabra.getpFirst();
@@ -88,8 +92,11 @@ public class Grafo {
             }
             letra = letra.getpNext();
         }
+  
     }
-    
+    /**
+     * Reestablece el color original de todos los nodos del grafo.
+     */
     public void limpiar(){
         for(Node n : grafo){
             n.setAttribute("ui.style", "fill-color: #EDD1BA;");
