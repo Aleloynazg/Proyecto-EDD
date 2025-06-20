@@ -39,6 +39,8 @@ private boolean EsDFS;
         grafo = new Grafo(tablero);
         buscador = new BuscarPalabra(tablero);
         grafo.mostrarGrafo();
+        botonBuscarPalabra = new javax.swing.JButton();
+        
         
 
         
@@ -111,6 +113,11 @@ private boolean EsDFS;
         getContentPane().add(BotonDSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         botonBuscarPalabra.setText("Agregar palabra");
+        botonBuscarPalabra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarPalabraActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonBuscarPalabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 210, 40));
 
         palabra.addActionListener(new java.awt.event.ActionListener() {
@@ -178,14 +185,17 @@ private boolean EsDFS;
  * @param evt 
  */
     private void botonBuscarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPalabraActionPerformed
-        // TODO add your handling code here:
+
+        botonBuscarPalabra.setText("");
+        
         String palabraBuscando = palabra.getText().trim().toUpperCase();
         boolean enDiccionario = diccionario.enDiccionario(palabraBuscando);
         boolean enTablero = buscador.existePalabraDFS(palabraBuscando);
         if(!enDiccionario && enTablero){
             JOptionPane.showMessageDialog(null, "La palabra no se encuentra en el diccionario pero si en el tablero, ahora se va a agregar");
             diccionario.insertarFinal(palabraBuscando);
-            cuadroDiccionario.setText(diccionario.mostrar());
+            cuadroDiccionario.setText(diccionario.mostrar());}
+
         BuscarPalabra busqueda = new BuscarPalabra(tablero);
         
         ListaSimple ruta = null;
@@ -203,7 +213,7 @@ private boolean EsDFS;
         } else{
             respuesta.setText("La palabra no existe en la sopa de letras");
         }
-        }
+
 
     }//GEN-LAST:event_botonBuscarPalabraActionPerformed
 /**
