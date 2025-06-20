@@ -73,4 +73,26 @@ public class Grafo {
     
     
 }
+    public void mostrarPalabra(ListaSimple palabra){
+        limpiar();
+        NodoLSimple letra = palabra.getpFirst();
+        NodoTablero nodo;
+        Node n;
+        String clave;
+        while(letra!=null){
+            nodo = letra.getDato();
+            clave = Integer.toString(nodo.getFila()) + "-" + Integer.toString(nodo.getColumna());
+            n = grafo.getNode(clave);
+            if(n!=null){
+                n.setAttribute("ui.style", "fill-color: purple;");
+            }
+            letra = letra.getpNext();
+        }
+    }
+    
+    public void limpiar(){
+        for(Node n : grafo){
+            n.setAttribute("ui.style", "fill-color: #EDD1BA;");
+        }
+    }
 }

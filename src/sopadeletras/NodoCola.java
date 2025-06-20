@@ -13,11 +13,13 @@ public class NodoCola {
     private NodoLSimple dato;
     private NodoCola pNext;
     private ListaSimple palabra;
+    private int posicion;
 
     
-    public NodoCola(NodoTablero nodo, ListaSimple palabra){
+    public NodoCola(NodoTablero nodo, ListaSimple palabra, int posicion){
     dato = new NodoLSimple(nodo);
     this.palabra = new ListaSimple();
+    this.posicion = posicion;
     NodoLSimple aux = palabra.getpFirst();
     while(aux!=null){
         this.palabra.insertarFinal(aux.getDato());
@@ -51,5 +53,12 @@ public class NodoCola {
      */
     public ListaSimple getPalabra() {
         return palabra;
+    }
+
+    /**
+     * @return the posicion
+     */
+    public int getPosicion() {
+        return posicion;
     }
 }

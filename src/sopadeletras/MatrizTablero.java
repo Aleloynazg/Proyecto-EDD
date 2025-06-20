@@ -72,6 +72,14 @@ public class MatrizTablero {
             return null;}
         
         }
+    
+    public void limpiar(){
+        for (int fila = 0; fila < 4; fila++) {
+            for (int columna = 0; columna < 4; columna++) {
+                matriz[fila][columna].setVisitado(false);
+            }
+        }
+    }
   
     
         

@@ -17,13 +17,19 @@ public class ColaBFS {
         size = 0;
     }
     
-    public void queue(NodoTablero dato, ListaSimple palabra, NodoTablero letraAnterior){
-        if(palabra==null){
-            palabra = new ListaSimple();
-        } else{
-            palabra.insertarFinal(letraAnterior);
+    public void queue(NodoTablero dato, ListaSimple palabra, NodoTablero letraAnterior, int posicion){
+        ListaSimple NuevaPalabra = new ListaSimple();
+        if(palabra!=null){
+            NodoLSimple aux = palabra.getpFirst();
+            while(aux!=null){
+                NuevaPalabra.insertarFinal(aux.getDato());
+                aux=aux.getpNext();
+            }
         }
-        NodoCola nodo = new NodoCola(dato, palabra);
+        if(letraAnterior!=null){
+            NuevaPalabra.insertarFinal(letraAnterior);
+        }
+        NodoCola nodo = new NodoCola(dato, NuevaPalabra, posicion);
 
         if(size==0){
             cabeza = nodo;

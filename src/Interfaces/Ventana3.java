@@ -7,35 +7,30 @@ package Interfaces;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import sopadeletras.BuscarPalabra;
 import sopadeletras.MatrizTablero;
 import sopadeletras.Grafo;
 import sopadeletras.ListaPalabra;
-import sopadeletras.BuscarPalabra;
 import sopadeletras.ListaSimple;
-
 
 /**
  *
  * @author alexandraloynaz
  */
 public class Ventana3 extends javax.swing.JFrame {
-
+public MatrizTablero tablero;
+public Grafo grafo;
+private boolean EsBFS;
     /**
      * Creates new form Ventana3
      */
-        private MatrizTablero tablero;
-        private ListaPalabra diccionario;
-        private Grafo grafo;
-        private BuscarPalabra buscador;
     public Ventana3(MatrizTablero tablero, ListaPalabra diccionario) {
-        this.tablero = tablero;
-        this.diccionario = diccionario;
-        this.buscador= new BuscarPalabra(tablero);
         tablero.conectarNodos();
         initComponents();
         setSize(500,540);
+        this.tablero = tablero;
         mostrarTablero(tablero);
-        this. grafo = new Grafo(tablero);
+        grafo = new Grafo(tablero);
         
         grafo.mostrarGrafo();
         
@@ -100,9 +95,20 @@ public class Ventana3 extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BotonBSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        BotonDSF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonDSFActionPerformed(evt);
+            }
+        });
         getContentPane().add(BotonDSF, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         botonBuscarPalabra.setText("Agregar palabra");
+        botonBuscarPalabra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarPalabraActionPerformed(evt);
+            }
+        });
         getContentPane().add(botonBuscarPalabra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 210, 40));
 
         palabra.addActionListener(new java.awt.event.ActionListener() {
@@ -134,61 +140,45 @@ public class Ventana3 extends javax.swing.JFrame {
 
     private void BotonBSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBSFActionPerformed
         // TODO add your handling code here:
+        this.EsBFS = true;
+        
         
     }//GEN-LAST:event_BotonBSFActionPerformed
 
     private void palabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_palabraActionPerformed
         // TODO add your handling code here:
-        String palabraBuscando = palabra.getText().trim().toUpperCase(); 
+        String palabraBuscando = palabra.getText(); 
         if (palabraBuscando.trim().length()<3){
             JOptionPane.showMessageDialog(null, "La palabra debe tener minimo 3 letras ", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
         }
-        
-        boolean enDiccionario = diccionario.enDiccionario(palabraBuscando);
-        boolean enTablero = buscador.existePalabraDFS(palabraBuscando);
-        if(!enDiccionario && enTablero){
-            JOptionPane.showMessageDialog(null, "La palabra no se encuentra en el diccionario pero si en el tablero, ahora se va a agregar");
-            diccionario.insertarFinal(palabraBuscando);
-            cuadroDiccionario.setText(diccionario.mostrar());
-            
-        
-        }
-        boolean encontrado = false; 
-        boolean BFSSeleccionado = false;
-        boolean DFSSeleccionado = false;
-        
-        if(DFSSeleccionado && BFSSeleccionado){
-            JOptionPane.showMessageDialog(null, "Solo puedes tener una opción seleccionado", "Error", JOptionPane.ERROR_MESSAGE);
-        
-        }
-        else{
-            if(BotonDSF.isSelected()){
-                encontrado = buscador.existePalabraDFS(palabraBuscando);
-            }
-            else if(BotonBSF.isSelected()){
-                ListaSimple resultado = buscador.BFSInicio(tablero.obtenerNodo(0, 0), palabraBuscando);
-                if(resultado != null){
-                    encontrado = true;
-                }
-            
-            }
-            
-        }
-        if (encontrado){
-            respuesta.setText("Palabra encontrada: "+ palabraBuscando);
-        }
-        else{
-            respuesta.setText("Palabra no encontrada: "+palabraBuscando);
-        }
-        
-        
-        
     }//GEN-LAST:event_palabraActionPerformed
 
     private void respuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_respuestaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_respuestaActionPerformed
+
+    private void botonBuscarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPalabraActionPerformed
+        // TODO add your handling code here:
+        BuscarPalabra busqueda = new BuscarPalabra(tablero);
+        String p = palabra.getText();
+        ListaSimple Lista = null;
+        if(this.EsBFS){
+            Lista = busqueda.BFSInicio(p);
+        } else{
+            //AÑADIR CODIGO DE BUSQUEDA DFS AQUI
+        }
+        if(Lista!=null){
+            grafo.mostrarPalabra(Lista);
+        } else{
+            JOptionPane.showMessageDialog(null, "La palabra no existe en la sopa de letras");
+        }
+        grafo.mostrarGrafo();
+    }//GEN-LAST:event_botonBuscarPalabraActionPerformed
+
+    private void BotonDSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDSFActionPerformed
+        // TODO add your handling code here:
+        this.EsBFS = false;
+    }//GEN-LAST:event_BotonDSFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,11 +208,11 @@ public class Ventana3 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-//                new Ventana3(tablero, diccionario).setVisible(true);
+                new Ventana3(tablero).setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

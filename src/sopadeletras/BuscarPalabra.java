@@ -1,5 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/imFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package sopadeletras;
@@ -111,7 +111,7 @@ public class BuscarPalabra {
 // * @return  true si la palabra se encuntra, false en casa contrario. 
 // */
 //    private boolean buscarBFS(NodoTablero inicio, String palabra){
-public ListaSimple BFSInicio(NodoTablero inicio, String palabra){
+public ListaSimple BFSInicio(String palabra){
     ColaBFS cola = new ColaBFS();
     palabra = palabra.toUpperCase(); 
     char primeraLetra=palabra.charAt(0);
@@ -119,8 +119,10 @@ public ListaSimple BFSInicio(NodoTablero inicio, String palabra){
             for (int columna = 0; columna < 4; columna++) {
                 NodoTablero nodo = tablero.obtenerNodo(fila, columna);
                 if(nodo.getLetra()== primeraLetra){
-                   cola.queue(nodo, null, null);
-                   ListaSimple resultado = BFS(cola, palabra, 1);
+                   nodo.setVisitado(true);
+                   cola.queue(nodo, null, null, 0);
+                   ListaSimple resultado = BFS(cola, palabra);
+                   this.tablero.limpiar();
                    if(resultado!=null){return resultado;}
                 }
                 }
@@ -129,11 +131,12 @@ public ListaSimple BFSInicio(NodoTablero inicio, String palabra){
 }
 
 
-public ListaSimple BFS(ColaBFS cola, String palabra, int ind){
+public ListaSimple BFS(ColaBFS cola, String palabra){
     NodoCola nodo = cola.dequeue();
     if(nodo==null){
         return null;
     }
+    int ind = nodo.getPosicion();
     NodoTablero Letra = nodo.getDato().getDato();
     if(ind == palabra.length() - 1){
         nodo.getPalabra().insertarFinal(Letra);
@@ -142,16 +145,27 @@ public ListaSimple BFS(ColaBFS cola, String palabra, int ind){
     ListaSimple adyacentes = Letra.getVecinos();
     NodoLSimple aux = adyacentes.getpFirst();
     while(aux!=null){
-        if(aux.getDato().isVisitado()==false && aux.getDato().getLetra()==palabra.charAt(ind)){
-            cola.queue(Letra, nodo.getPalabra(), nodo.getDato().getDato());
+        if(aux.getDato().isVisitado()==false && aux.getDato().getLetra()==palabra.charAt(ind + 1)){
+            aux.getDato().setVisitado(true);
+            cola.queue(aux.getDato(), nodo.getPalabra(), Letra, ind + 1);
         }
         aux = aux.getpNext();
     }
-    BFS(cola, palabra, ind++);
-    return null;
+    ListaSimple l = BFS(cola, palabra);
+    return l;
 }
 }
-
+//
+//
+//
+//}
+//    
+//    
+//    
+//    
+//    
+//    
+//    }
     
     
-
+    

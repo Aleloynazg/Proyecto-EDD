@@ -83,11 +83,13 @@ public class ListaSimple {
      */
     public void imprimir(){
     NodoLSimple aux = pFirst; 
+    String palabra = "";
     while (aux!= null){
-        System.out.println(aux.getDato()+ " ");
+        palabra += aux.getDato().getLetra();
         aux=aux.getpNext();}
-    
+        System.out.println(palabra);
     }
+    
     /**
      * Obtiene el primer nodo de la lista 
      * @return el primer nodo de la lista
@@ -121,4 +123,3 @@ public class ListaSimple {
     }
    
 }
-
