@@ -11,6 +11,7 @@ package sopadeletras;
  */
 public class NodoPalabra {
     private String palabra; 
+    private boolean encontrada;
     private NodoPalabra pNext; 
 
     /**
@@ -19,6 +20,7 @@ public class NodoPalabra {
      */
     public NodoPalabra(String palabra) {
         this.palabra = palabra;
+        this.encontrada = false;
         this.pNext = null;
     }
 
@@ -44,6 +46,18 @@ public class NodoPalabra {
      */
     public NodoPalabra getpNext() {
         return pNext;
+    }
+    
+    /**
+     * Verifica si la palabra ya fue encontrada y buscada por el usuario. 
+     * @param encontrada 
+     */
+    public boolean esEncontrada(){
+        return encontrada;
+    
+    }
+    public void setEncontrada(boolean encontrada){
+    this.encontrada = encontrada;
     }
 
     /**

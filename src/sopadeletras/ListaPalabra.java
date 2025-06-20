@@ -14,7 +14,7 @@ public class ListaPalabra {
     private NodoPalabra pFirst; 
     private int cont; 
 /**
- * Cosntrictor de la lista, inicializa la lista vacía.
+ * Constructor de la lista, inicializa la lista vacía.
  */
     public ListaPalabra() {
         this.pFirst = null;
@@ -59,6 +59,7 @@ public class ListaPalabra {
         }
             cont++ ;  
     }
+    
     /**
      * Busca y retorna el último nodo de la lista
      * @return el último nodo de la lista, o null si es vacía
@@ -79,7 +80,7 @@ public class ListaPalabra {
     /**
      * Muestra todas las palabras que se encuentran en el diccionario.
      * 
-     * @return todas las palabras de la  
+     * @return todas las palabras del diccionario y les coloca un check a las que ya fueron encontradas.  
      */
     public String mostrar(){
         String palabra = "";
@@ -88,10 +89,57 @@ public class ListaPalabra {
         return "el diccionario esta vacio";
     }
     while(aux!=null){
-        palabra += aux.getPalabra() + "\n" ;
+        palabra += aux.getPalabra();
+        if(aux.esEncontrada()){
+            palabra += "✅"; 
+        }
+        palabra += "\n";
         aux = aux.getpNext();
     }
     return palabra;   
+    }
+    
+    /**
+     * Cambia el encontrada a verdadero si la palabra se encuntra en el tablero
+     * @param palabra la palabra que se esta buscando.
+     */
+    public void marcarEncontrada(String palabra){
+        NodoPalabra aux = getpFirst();
+        while(aux!= null){
+        if(aux.getPalabra().equals(palabra)){
+            aux.setEncontrada(true);
+            return;
+            
+        }
+        aux=aux.getpNext();
+        }
+    }
+    
+    /**
+     * Cuenta cuantas palabras ya han sido encontradas
+     * @return el numero de palabras que ya fueron encontradas
+     */
+    public int contarEncontradas(){
+        int contador = 0; 
+        NodoPalabra aux = getpFirst(); 
+        while (aux!= null){
+        if(aux.esEncontrada()){
+            contador ++;
+        } aux = aux.getpNext();
+        }
+    return contador;
+    }
+    
+    /**
+     * Reinicia las palabras encontradas para volver a comenzar la sopa de letras
+     */
+    public void reiniciarEncontradas(){
+        NodoPalabra aux = getpFirst(); 
+        while(aux!= null){
+        aux.setEncontrada(false);
+        aux = aux.getpNext();}
+    
+    
     }
     /**
      * Busca una palabra para ver si se encuentra dentro de la lista.

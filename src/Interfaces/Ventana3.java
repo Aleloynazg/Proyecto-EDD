@@ -24,6 +24,8 @@ public Grafo grafo;
 private boolean EsBFS;
 private boolean EsDFS;
  private BuscarPalabra buscador;
+ private boolean cronometro = false; 
+ private long tiempo = 0;
     /**
      * Contructor que genera una instancia de ventana3 con el tablero y diccionario especifico 
      * @param tablero el tablero con todas las letras
@@ -40,7 +42,7 @@ private boolean EsDFS;
         buscador = new BuscarPalabra(tablero);
         grafo.mostrarGrafo();
         botonBuscarPalabra = new javax.swing.JButton();
-        
+
         
 
         
@@ -48,9 +50,9 @@ private boolean EsDFS;
        botonBuscarPalabra.setIcon(buscarPalabra);
        ImageIcon botonReestablecer = new ImageIcon(getClass().getResource("/Imagenes/BotonReestablecer.png"));
        BotonReestablecer.setIcon(botonReestablecer);
-//
 
-//
+
+
         ImageIcon imagenFondo= new ImageIcon(getClass().getResource("/Imagenes/FondoVentana3.png"));
         JLabel fondo = new JLabel(imagenFondo);
        getContentPane().add(fondo,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 500));
@@ -187,11 +189,14 @@ private boolean EsDFS;
     private void botonBuscarPalabraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPalabraActionPerformed
 
         botonBuscarPalabra.setText("");
-        
+        if(!cronometro){
+            tiempo = System.currentTimeMillis();
+            cronometro = true;
+        }
         String palabraBuscando = palabra.getText().trim().toUpperCase();
         boolean enDiccionario = diccionario.enDiccionario(palabraBuscando);
         boolean enTablero = buscador.existePalabraDFS(palabraBuscando);
-        if(!enDiccionario && enTablero){
+        if(!enDiccionario && enTablero && palabraBuscando.length()>=3){
             JOptionPane.showMessageDialog(null, "La palabra no se encuentra en el diccionario pero si en el tablero, ahora se va a agregar");
             diccionario.insertarFinal(palabraBuscando);
             cuadroDiccionario.setText(diccionario.mostrar());}
@@ -209,11 +214,22 @@ private boolean EsDFS;
         if(ruta!=null){
             grafo.limpiar();
             grafo.mostrarPalabra(ruta);
+            diccionario.marcarEncontrada(palabraBuscando);
+            cuadroDiccionario.setText(diccionario.mostrar());
             respuesta.setText("Palabra encontrada: "+ palabraBuscando);
+            
         } else{
             respuesta.setText("La palabra no existe en la sopa de letras");
         }
-
+        int encontradas = diccionario.contarEncontradas(); 
+        int total = diccionario.getCont();
+        if (encontradas == total){
+            long tiempofinal = System.currentTimeMillis();
+            long tiempototal= tiempofinal-tiempo;
+            JOptionPane.showMessageDialog(null, "Felicidades!! ya conseguiste todas las palabras del diccionario" + " En un tiempo de: "+ tiempototal+" milisegundos");
+}
+    
+   
 
     }//GEN-LAST:event_botonBuscarPalabraActionPerformed
 /**
@@ -233,7 +249,11 @@ private boolean EsDFS;
        BotonDSF.setSelected(false);
          this.EsBFS=false; 
        this.EsDFS= false;
+       diccionario.reiniciarEncontradas();
+       cuadroDiccionario.setText(diccionario.mostrar());
        grafo.limpiar();
+       tiempo = 0; 
+       cronometro = false;
        JOptionPane.showMessageDialog(null, "Puede comenzar a buscar una nueva palabra");
 
     }//GEN-LAST:event_BotonReestablecerActionPerformed
