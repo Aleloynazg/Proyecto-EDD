@@ -8,7 +8,9 @@ import sopadeletras.ListaPalabra;
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -20,6 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Leertxt {
     private MatrizTablero tablero; 
     private ListaPalabra diccionario;
+    private File archivo;
 
 /**
  * Constructor que inicializa las estructuras de datos necesarias, 
@@ -46,11 +49,13 @@ public class Leertxt {
             return false; 
         }
         
-            File archivo = selcArchivo.getSelectedFile();
+            archivo = selcArchivo.getSelectedFile();
         return revisarArchivo(archivo);
     
     
     }
+    
+    
     /**
      * Procesa el archivo seleccionado y verifica su formato y contenido.
      * @param archivo EL archivo a procesar.
@@ -118,8 +123,63 @@ public class Leertxt {
             JOptionPane.showMessageDialog(null, "Error inesperado", "error", JOptionPane.ERROR_MESSAGE);
         return false;
     }
-    
+}
+    /**
+     * Agrega las palabras que no aparecen en el diccionario pero si en el tablero al TXT
+     * @param palabra palabra que se desea agregar
+     * @return true si la palabra fue agregada con éxito, false si no se logro agregar la palabra.
+     */
+    public boolean agregarPalabraAlDiccionario (String palabra){
+        BufferedReader br = null;
         
+    if(archivo == null){
+        JOptionPane.showMessageDialog(null, "No se ha cargado ningun archivo o error inesperado", "error", JOptionPane.ERROR_MESSAGE);
+        return false; 
+    }
+    try{
+        br= new BufferedReader(new FileReader(archivo));
+        String palabraNueva = "";
+        String linea;
+        boolean enDiccionario= false; 
+        boolean palabraAgregada = false;
+        while((linea = br.readLine())!= null){
+        linea = linea.trim();
+        if(linea.replace("\uFEFF", "").equals("dic")|| linea.equals("dic")){
+            enDiccionario = true; 
+            palabraNueva+= linea +"\n";
+            continue;
+        }
+        if(enDiccionario && linea.equals("/dic")){
+            if(!palabraAgregada){
+            palabraNueva += palabra + "\n";
+            palabraAgregada = true; 
+            
+            }
+            enDiccionario = false; 
+            palabraNueva += linea +"\n";
+            continue;
+            
+            
+        }
+        palabraNueva += linea +"\n";
+        
+        
+        }
+        br.close();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, false));
+        bw.write(palabraNueva);
+        bw.close();
+        return true; 
+
+        
+    
+    } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error inesperado al actualizar el archivo", "error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+
+    
     
     
 }

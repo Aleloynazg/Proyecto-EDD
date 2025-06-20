@@ -12,12 +12,14 @@ import sopadeletras.MatrizTablero;
 import sopadeletras.Grafo;
 import sopadeletras.ListaPalabra;
 import sopadeletras.ListaSimple;
+import leerTXT.Leertxt;
 
 /**
  * Ventana que muestra el tablero de a sopa de letras, permite buscar palabras y visualizar la ruta segun dos algoritmos.
  * @author alexandraloynaz
  */
 public class Ventana3 extends javax.swing.JFrame {
+private Leertxt lector;
 public MatrizTablero tablero;
 private ListaPalabra diccionario;
 public Grafo grafo;
@@ -31,10 +33,11 @@ private boolean EsDFS;
      * @param tablero el tablero con todas las letras
      * @param diccionario lista de palabras que se encuentran en este tablero. 
      */
-    public Ventana3(MatrizTablero tablero, ListaPalabra diccionario) {
+    public Ventana3(MatrizTablero tablero, ListaPalabra diccionario, Leertxt lector) {
         tablero.conectarNodos();
         initComponents();
         setSize(500,540);
+        this.lector = lector;
         this.tablero = tablero;
         this.diccionario=diccionario;
         mostrarTablero(tablero);
@@ -163,7 +166,7 @@ private boolean EsDFS;
     private void BotonBSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBSFActionPerformed
         // TODO add your handling code here:
         this.EsBFS = true;
-        this.EsDFS = false;
+
         
         
     }//GEN-LAST:event_BotonBSFActionPerformed
@@ -197,13 +200,25 @@ private boolean EsDFS;
         boolean enDiccionario = diccionario.enDiccionario(palabraBuscando);
         boolean enTablero = buscador.existePalabraDFS(palabraBuscando);
         if(!enDiccionario && enTablero && palabraBuscando.length()>=3){
+            
             JOptionPane.showMessageDialog(null, "La palabra no se encuentra en el diccionario pero si en el tablero, ahora se va a agregar");
+            boolean agregada = lector.agregarPalabraAlDiccionario(palabraBuscando);
+            if(agregada){
             diccionario.insertarFinal(palabraBuscando);
             cuadroDiccionario.setText(diccionario.mostrar());}
+            else{
+            JOptionPane.showMessageDialog(null, "No se pudo agregar la palabra", "error", JOptionPane.ERROR_MESSAGE);
+            }
+        
+        }
 
         BuscarPalabra busqueda = new BuscarPalabra(tablero);
         
         ListaSimple ruta = null;
+        if(BotonBSF.isSelected() && BotonDSF.isSelected()){
+            JOptionPane.showMessageDialog(null, "Solo puedes seleccionar una opcion", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         if(this.EsBFS){
             ruta = busqueda.BFSInicio(palabraBuscando);
         } else{
@@ -238,7 +253,7 @@ private boolean EsDFS;
  */
     private void BotonDSFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDSFActionPerformed
         // TODO add your handling code here:
-        this.EsBFS = false;
+
         this.EsDFS= true; 
     }//GEN-LAST:event_BotonDSFActionPerformed
 
@@ -247,7 +262,7 @@ private boolean EsDFS;
       respuesta.setText("");
       BotonBSF.setSelected(false);
        BotonDSF.setSelected(false);
-         this.EsBFS=false; 
+       this.EsBFS=false; 
        this.EsDFS= false;
        diccionario.reiniciarEncontradas();
        cuadroDiccionario.setText(diccionario.mostrar());

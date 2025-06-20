@@ -140,7 +140,7 @@ public class Ventana2 extends javax.swing.JFrame {
  */
     private void BotonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonContinuarActionPerformed
         if(continuar){
-            Ventana3 v3 = new Ventana3(lector.getTablero(), lector.getDiccionario()); 
+            Ventana3 v3 = new Ventana3(lector.getTablero(), lector.getDiccionario(), lector); 
             v3.setVisible(true);
             this.dispose();}
         else{
