@@ -15,6 +15,7 @@ public class NodoTablero {
     private int columna; 
     private boolean visitado; 
     private ListaSimple vecinos; 
+    private NodoTablero padre;
 /**
  * Constructor para generar un nodo nuevo
  * @param letra letra que va a contener ese nodo
@@ -28,7 +29,20 @@ public class NodoTablero {
         this.columna = columna;
         this.visitado = false;
         this.vecinos = new ListaSimple();
+        this.padre = null;
     }
+    
+     // Método para establecer el padre
+    public void setPadre(NodoTablero padre) {
+        this.padre = padre;
+    }
+
+    // Método para obtener el padre
+    public NodoTablero getPadre() {
+        return padre;
+    }
+    
+
     /**
      * Agrega un nodo vecino a la lista de adyacencia. 
      * 

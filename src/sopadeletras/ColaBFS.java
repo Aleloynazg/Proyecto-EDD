@@ -40,6 +40,17 @@ public class ColaBFS {
         if(letraAnterior!=null){
             NuevaPalabra.insertarFinal(letraAnterior);
         }
+        
+        /** Se establece el padre del 'dato' antes de crear el NodoCola
+        * ahora letraAnterior' es el NodoTablero desde el cual llegamos a 'dato'
+        * */
+        
+        if (letraAnterior != null) {
+            dato.setPadre(letraAnterior);
+        } else {
+            dato.setPadre(null); // Si no hay letra anterior, es el nodo inicial
+        }
+        
         NodoCola nodo = new NodoCola(dato, NuevaPalabra, posicion);
 
         if(size==0){

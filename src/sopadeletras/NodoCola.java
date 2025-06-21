@@ -41,36 +41,45 @@ public class NodoCola {
     
     }
     /**
-     * @return the dato
-     */
+ * Obtiene el {@code NodoLSimple} que encapsula el {@code NodoTablero} (la letra) asociado a este nodo de la cola.
+ *@Corina lynch
+ * @return El {@code NodoLSimple} que contiene el dato principal de este {@code NodoCola}.
+ */
     public NodoLSimple getDato() {
         return dato;
     }
 
-    /**
-     * @return the pNext
-     */
+   /**
+ * Obtiene el siguiente nodo en la cola.
+ *@autor Corina lynch
+ * @return El siguiente {@code NodoCola} en la secuencia de la cola.
+ */
     public NodoCola getpNext() {
         return pNext;
     }
 
-    /**
-     * @param pNext the pNext to set
-     */
+   /**
+ * Establece el siguiente nodo en la cola.
+ *@autor Corina lynch 
+ * @param pNext El {@code NodoCola} que se establecerá como el siguiente en la secuencia.
+ */
     public void setpNext(NodoCola pNext) {
         this.pNext = pNext;
     }
-
-    /**
-     * @return the palabra
-     */
+/**
+ * Obtiene la {@code ListaSimple} que representa la palabra construida hasta el punto actual de este nodo.
+ *@autor corina lynch
+ * @return La {@code ListaSimple} que contiene los {@code NodoTablero} que forman la palabra.
+ */
     public ListaSimple getPalabra() {
         return palabra;
     }
 
     /**
-     * @return the posicion
-     */
+ * Obtiene la posición (índice) de la letra que este nodo representa dentro de la palabra objetivo.
+ *@autor Corina lynch
+ * @return Un entero que indica la posición de la letra.
+ */
     public int getPosicion() {
         return posicion;
     }
